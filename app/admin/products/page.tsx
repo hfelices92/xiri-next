@@ -26,12 +26,10 @@ async function getProducts(currentPage: number, pageSize: number) {
 
 export type ProductWithCategory = Awaited<ReturnType<typeof getProducts>>;
 
-export default async function ProductsPage({
-  searchParams,
-}: {
-  searchParams: { page: string };
-}) {
-  const currentPage = parseInt(searchParams.page) || 1;
+type Params = Promise<{ page: string }>;
+export default async function ProductsPage({ params }: { params: Params }) {
+  const { page } = await params;
+  const currentPage = parseInt(page) || 1;
   const pageSize = 10;
   if (currentPage < 1) {
     return redirect("/admin/products");

@@ -17,15 +17,16 @@ async function getTotalProducts(query: string) {
   });
   return totalProducts;
 }
+
 async function searchProducts(
   query: string,
   currentPage: number,
   pageSize: number
 ) {
   const skip = (currentPage - 1) * pageSize;
-  const products = prisma.product.findMany({
+  const products = await prisma.product.findMany({
     take: 10,
-    skip: skip,
+    skip,
     where: {
       name: {
         contains: query,
@@ -39,26 +40,29 @@ async function searchProducts(
   return products;
 }
 
+// 👇 Aquí definimos el tipo, igual que con params
+type SearchParams = Promise<{ search?: string; page?: string }>;
+
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { search: string; page: string };
+  searchParams: SearchParams;
 }) {
-  const { search } = searchParams;
+  const { search = "", page = "1" } = await searchParams; // 👈 necesario con Next 15
 
-  const currentPage = parseInt(searchParams.page) || 1;
+  const currentPage = parseInt(page) || 1;
   const pageSize = 10;
+
   if (currentPage < 1) {
     return redirect("/admin/products");
   }
-  const productsData = await searchProducts(search, currentPage, pageSize);
-  const totalProductsData = getTotalProducts(search);
+
   const [products, totalProducts] = await Promise.all([
-    productsData,
-    totalProductsData,
+    searchProducts(search, currentPage, pageSize),
+    getTotalProducts(search),
   ]);
+
   const totalPages = Math.ceil(totalProducts / pageSize);
-  console.log(totalProducts);
 
   return (
     <>
@@ -66,7 +70,7 @@ export default async function SearchPage({
       <div className="flex flex-col gap-5 lg:flex-row lg:justify-between">
         <Link
           href={"/admin/products/new"}
-          className="bg-amber-400 w-full lg:w-auto text-xl px-10 py-3 text-center rounded-md  font-bold hover:bg-amber-500 transition"
+          className="bg-amber-400 w-full lg:w-auto text-xl px-10 py-3 text-center rounded-md font-bold hover:bg-amber-500 transition"
         >
           Crear Producto Nuevo
         </Link>

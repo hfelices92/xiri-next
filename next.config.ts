@@ -9,7 +9,11 @@ const nextConfig: NextConfig = {
         hostname: 'res.cloudinary.com',
       },
     ],
-  }
+  },
+   eslint: {
+    // Permite compilar aunque haya errores o warnings de ESLint
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

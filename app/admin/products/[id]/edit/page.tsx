@@ -1,7 +1,5 @@
-
 import Heading from "@/components/ui/Heading";
 import { prisma } from "@/src/lib/prisma";
-import { log } from "console";
 import { notFound } from "next/navigation";
 import EditProductForm from "@/components/products/EditProductForm";
 import ProductForm from "@/components/products/ProductForm";
@@ -17,14 +15,11 @@ async function getProductById(id: number) {
   }
   return product;
 }
+type Params = Promise<{ id: string }> ;
+export default async function EditProductsPage({ params }: { params: Params }) {
+  const { id } = await params;
+  const product = await getProductById(Number(id));
 
-export default async function EditProductsPage({
-  params,
-}: {
-  params: { id: number };
-}) {
-  const product = await getProductById(+params.id);
-  log(product);
   return (
     <>
       <Heading>Editar Producto</Heading>
