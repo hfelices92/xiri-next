@@ -1,7 +1,7 @@
 import React from "react";
-import { prisma } from "@/src/lib/prisma";
-import ProductCard from "@/components/products/ProductCard";
-import Heading from "@/components/ui/Heading";
+import { prisma } from "../../../src/lib/prisma";
+import ProductCard from "../../../components/products/ProductCard";
+import Heading from "../../../components/ui/Heading";
 
 const getProductsByCategory = async (category: string) => {
   return await prisma.product.findMany({

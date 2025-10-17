@@ -1,9 +1,9 @@
 "use client";
-import Heading from "@/components/ui/Heading";
+import Heading from "../../../components/ui/Heading";
 import React from "react";
-import OrderCard from "@/components/order/OrderCard";
+import OrderCard from "../../../components/order/OrderCard";
 import useSWR from "swr";
-import { OrderWithItems } from "@/src/types";
+import { OrderWithItems } from "../../../src/types";
 
 export default function AdminOrdersPage() {
   const url = "/admin/orders/api";

@@ -1,7 +1,7 @@
 "use client";
-import LatestOrderItem from "@/components/order/LatestOrderItem";
-import Logo from "@/components/ui/Logo";
-import { OrderWithItems } from "@/src/types";
+import LatestOrderItem from "../../components/order/LatestOrderItem";
+import Logo from "../../components/ui/Logo";
+import { OrderWithItems } from "../../src/types";
 import React from "react";
 import useSWR from "swr";
 

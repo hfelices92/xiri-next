@@ -1,7 +1,7 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { prisma } from "@/src/lib/prisma";
-import { OderIdSchema } from "@/src/schema";
+import { prisma } from "../src/lib/prisma";
+import { OderIdSchema } from "../src/schema";
 
 export async function completeOrder(formData: FormData) {
   const data = {

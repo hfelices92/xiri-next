@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "@/app/generated/prisma";
+import { Product } from "@prisma/client";
 import { useStore } from "@/src/store";
 import React from "react";
 
