@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
 
+
 export default function ImageUpload({ image }: { image?: string }) {
   const [imageUrl, setimageUrl] = useState("");
   return (
@@ -12,7 +13,7 @@ export default function ImageUpload({ image }: { image?: string }) {
       onSuccess={(result, { widget }) => {
         if (result.event === "success") {
           widget.close();
-          //@ts-expect-error
+          // @ts-expect-error: result.info no está tipado correctamente por Cloudinary
           setimageUrl(result.info?.secure_url);
         }
       }}
