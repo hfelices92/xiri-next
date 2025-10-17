@@ -5,7 +5,6 @@ import { log } from "console";
 import { notFound } from "next/navigation";
 import EditProductForm from "@/components/products/EditProductForm";
 import ProductForm from "@/components/products/ProductForm";
-import Link from "next/link";
 import GoBackButton from "@/components/ui/GoBackButton";
 
 async function getProductById(id: number) {
