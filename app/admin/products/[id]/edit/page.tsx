@@ -1,4 +1,4 @@
-("");
+
 import Heading from "@/components/ui/Heading";
 import { prisma } from "@/src/lib/prisma";
 import { log } from "console";
@@ -21,7 +21,7 @@ async function getProductById(id: number) {
 export default async function EditProductsPage({
   params,
 }: {
-  params: { id: string };
+  params: { id: number };
 }) {
   const product = await getProductById(+params.id);
   log(product);
