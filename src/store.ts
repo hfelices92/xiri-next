@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { OrderItem } from "./types";
-import { Product } from "@/app/generated/prisma";
+import { Product } from "@prisma/client";
 
 interface Store {
   order: OrderItem[];
